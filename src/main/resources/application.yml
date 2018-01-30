@@ -1,0 +1,37 @@
+spring:
+  main:
+    banner-mode: "off"
+  application:
+    name: oauth2-client-service
+server:
+    port: 8080
+
+oauth2-client:
+  person: http://localhost:8081/person
+
+
+logging.level.org.keycloak : trace
+logging.level.org.springframework.security: trace
+logging.level.org.springframework.web-security: trace
+
+security:
+  authserverurl: http://localhost:8280
+  realm: demo-realm
+  oauth2:
+    client:
+      id: demo-client
+      secret: fe8b3438-e75b-4386-ad21-e0ee44cbf386
+#      username: demo-user
+#      password: 123
+      accessTokenUri: ${security.authserverurl}/auth/realms/${security.realm}/protocol/openid-connect/token
+      userAuthorizationUri: ${security.authserverurl}/auth/realms/${security.realm}/protocol/openid-connect/auth
+    resource:
+      userInfoUri: ${security.authserverurl}/auth/realms/${security.realm}/protocol/openid-connect/userinfo
+  basic:
+    enabled: false
+
+
+
+management:
+  security:
+    enabled: false
